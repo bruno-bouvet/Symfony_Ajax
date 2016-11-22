@@ -45,7 +45,7 @@ class TestController extends Controller
                 ->from('AppBundle:Test', 't')
                 ->where("t.nom LIKE :motcle OR t.prenom LIKE :motcle")
                 ->orderBy('t.nom', 'ASC')
-                ->setParameter('motcle', $motcle.'%');
+                ->setParameter('motcle', '%'.$motcle.'%');
 
             $query = $qb->getQuery();
             $tests = $query->getResult();
