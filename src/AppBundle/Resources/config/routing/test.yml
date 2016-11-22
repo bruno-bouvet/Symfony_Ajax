@@ -1,0 +1,29 @@
+test_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Test:index" }
+    methods:  GET
+
+test_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Test:show" }
+    methods:  GET
+
+test_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Test:new" }
+    methods:  [GET, POST]
+
+test_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Test:edit" }
+    methods:  [GET, POST]
+
+test_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Test:delete" }
+    methods:  DELETE
+
+test_ajax:
+    path:     /ajax
+    defaults: { _controller: "AppBundle:Test:ajax" }
+    methods:  POST

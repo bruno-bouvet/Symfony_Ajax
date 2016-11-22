@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tests list</h1>
+    <form>
+    <input type="text" id="rechercheInput">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Comment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for test in tests %}
+            <tr class="test">
+                <td><a href="{{ path('test_show', { 'id': test.id }) }}">{{ test.id }}</a></td>
+                <td>{{ test.nom }}</td>
+                <td>{{ test.prenom }}</td>
+                <td>{{ test.comment }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('test_show', { 'id': test.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('test_edit', { 'id': test.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('test_new') }}">Create a new test</a>
+        </li>
+    </ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $('#rechercheInput').keyup(function () {
+            form = $(this);
+
+            var motcle = $("#rechercheInput").val();
+            var DATA = 'motcle=' + motcle;
+
+            $.ajax({
+                type: "POST",
+                url: "{{ path('test_ajax')}}",
+                data: DATA,
+                cache: false,
+                success: function(data){
+                    $('body').html(data);
+                    $("#rechercheInput").val(motcle);
+                }
+            });
+        });
+    </script>
+{% endblock %}
