@@ -53,7 +53,7 @@ class TestController extends Controller
         else {
             $tests = $em->getRepository('AppBundle:Test')->findAll();
         }
-        return $this->container->get('templating')->renderResponse('AppBundle:test:index.html.twig', array(
+        return $this->container->get('templating')->renderResponse('AppBundle:test:ajax_liste.html.twig', array(
             'tests' => $tests,
         ));
     }

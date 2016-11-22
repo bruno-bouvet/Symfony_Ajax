@@ -5,37 +5,10 @@
     <form>
     <input type="text" id="rechercheInput">
     </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Comment</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for test in tests %}
-            <tr class="test">
-                <td><a href="{{ path('test_show', { 'id': test.id }) }}">{{ test.id }}</a></td>
-                <td>{{ test.nom }}</td>
-                <td>{{ test.prenom }}</td>
-                <td>{{ test.comment }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('test_show', { 'id': test.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('test_edit', { 'id': test.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+    <div id="divReponseRecherche">
+            {% include 'AppBundle:test:ajax_liste.html.twig' with {'tests' : tests}  %}
+    </div>
 
     <ul>
         <li>
@@ -56,7 +29,7 @@
                 data: DATA,
                 cache: false,
                 success: function(data){
-                    $('body').html(data);
+                    $('#divReponseRecherche').html(data);
                     $("#rechercheInput").val(motcle);
                 }
             });
